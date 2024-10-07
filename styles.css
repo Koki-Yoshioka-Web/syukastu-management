@@ -1,7 +1,7 @@
 /* Modal styles */
 body {
   background-color: #2c2c2c;
-  color: white;
+  color: rgb(255, 255, 255);
   font-family: Arial, sans-serif;
   overflow-x: hidden;
 }
@@ -19,7 +19,7 @@ body {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgb(94, 94, 94);
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -50,7 +50,7 @@ body {
 }
 
 #eventList li {
-  background-color: #f9f9f9;
+  background-color: #949494;
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 4px;
