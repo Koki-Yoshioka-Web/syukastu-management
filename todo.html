@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo List</title>
+    <!-- Link to custom CSS -->
+    <link rel="stylesheet" href="todo.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <div><h1>就勝アプリ</h1></div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">カレンダー</a></li>
+          <li><a href="todo.html">ToDoリスト</a></li>
+          <li><a href="company.html">企業管理</a></li>
+        </ul>
+      </nav>
+    </header>
+    <hr />
+
+    <h2>やるべきこと</h2>
+
+    <div class="todo">
+      <input type="text" id="new-task" placeholder="Add a new task" />
+      <input type="date" id="task-deadline" />
+      <button onclick="addTask()">追加する</button>
+      <ul id="task-list"></ul>
+    </div>
+
+    <!-- Link to custom JS -->
+    <script src="todo.js"></script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>企業マイページ管理</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="company.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <div><h1>就勝アプリ</h1></div>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">カレンダー</a></li>
+          <li><a href="todo.html">ToDoリスト</a></li>
+          <li><a href="company.html">企業管理</a></li>
+        </ul>
+      </nav>
+    </header>
+    <hr />
+
+    <h2>企業管理</h2>
+
+    <div class="company-form">
+      <input type="text" id="company-name" placeholder="企業名" />
+      <input type="url" id="company-url" placeholder="URL" />
+      <input type="text" id="company-id" placeholder="ID" />
+      <input type="password" id="company-password" placeholder="パスワード" />
+      <button onclick="addCompany()">追加</button>
+    </div>
+
+    <h2>登録済み企業</h2>
+    <table id="company-table">
+      <thead>
+        <tr>
+          <th>企業名</th>
+          <th>URL</th>
+          <th>ID</th>
+          <th>パスワード</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be dynamically added here -->
+      </tbody>
+    </table>
+
+    <!-- Custom JS -->
+    <script src="company.js"></script>
+  </body>
+</html>

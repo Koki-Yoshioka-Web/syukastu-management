@@ -1,0 +1,129 @@
+/* Global styles */
+body {
+  background-color: #2c2c2c;
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+}
+
+header .logo img {
+  width: 80px; /* Adjust the width as needed */
+}
+
+header nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+header nav ul li {
+  margin-left: 20px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #555;
+  border-radius: 5px;
+}
+
+header nav ul li a:hover {
+  background-color: #777;
+}
+
+.company-form input,
+.company-form button,
+.todo input,
+.todo button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+button.delete-btn,
+.todo button {
+  background-color: #ff5c5c;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.delete-btn:hover,
+.todo button:hover {
+  background-color: #e53935;
+}
+
+/* Remove bullet points and align list items to the left */
+#task-list {
+  list-style-type: none; /* Remove the default bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+#task-list li {
+  background-color: #444;
+  color: white;
+  border: 1px solid #555;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: left; /* Align text to the left */
+  width: 100%; /* Ensure full width for mobile */
+  box-sizing: border-box;
+}
+
+/* Mobile styles for smaller screens (iPhone) */
+@media (max-width: 600px) {
+  #task-list li {
+    width: 100%; /* Ensure list items are full width on mobile */
+    text-align: left; /* Keep text aligned to the left */
+  }
+}
+
+/* Mobile styles for smaller screens (iPhone) */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  header nav ul {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  header nav ul li {
+    width: auto;
+    margin: 0;
+  }
+
+  header nav ul li a {
+    padding: 10px;
+    width: auto;
+    text-align: center;
+  }
+
+  header .logo h1 {
+    font-size: 20px;
+    margin-bottom: 10px; /* Add space between the logo and the buttons */
+  }
+}
