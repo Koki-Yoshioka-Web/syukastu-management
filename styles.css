@@ -200,3 +200,33 @@ header nav ul li a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+/* Reduce the font size and padding of the navigation links */
+header nav ul li a {
+  font-size: 11px; /* Smaller font size */
+  padding: 8px 12px; /* Adjust padding to make the buttons smaller */
+}
+
+/* Reduce the space between the nav items */
+header nav ul {
+  gap: 10px; /* Reduce the spacing between links */
+}
+
+/* Adjust the overall nav container if needed */
+header nav {
+  padding: 5px 10px; /* Adjust padding for the entire nav */
+}

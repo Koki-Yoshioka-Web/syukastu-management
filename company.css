@@ -198,3 +198,19 @@ header nav ul li a:hover {
     gap: 5px; /* Reduce gap between header buttons */
   }
 }
+
+/* Reduce the font size and padding of the navigation links */
+header nav ul li a {
+  font-size: 11px; /* Smaller font size */
+  padding: 8px 12px; /* Adjust padding to make the buttons smaller */
+}
+
+/* Reduce the space between the nav items */
+header nav ul {
+  gap: 10px; /* Reduce the spacing between links */
+}
+
+/* Adjust the overall nav container if needed */
+header nav {
+  padding: 5px 10px; /* Adjust padding for the entire nav */
+}
