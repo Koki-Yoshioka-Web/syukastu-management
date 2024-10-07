@@ -217,7 +217,7 @@ header nav ul li a:hover {
 
 /* Reduce the font size and padding of the navigation links */
 header nav ul li a {
-  font-size: 1px; /* Smaller font size */
+  font-size: 10px; /* Smaller font size */
   padding: 8px 12px; /* Adjust padding to make the buttons smaller */
 }
 
