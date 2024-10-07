@@ -2,138 +2,104 @@ document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendar");
   var eventListEl = document.getElementById("eventList");
 
-  // モーダルの要素を取得
-  var modal = document.getElementById("eventModal");
-  var modalTitle = document.getElementById("eventTitle");
-  var modalDate = document.getElementById("eventDate");
-  var modalDescription = document.getElementById("eventDescription");
-  var closeModal = document.getElementsByClassName("close-btn")[0];
-
-  // ローカルストレージから保存されたイベントを読み込む
-  var savedEvents = JSON.parse(localStorage.getItem("calendarEvents")) || [];
+  // モーダル要素を取得
+  var addEventModal = document.getElementById("addEventModal");
+  var closeAddEventModal = document.getElementById("closeAddEventModal");
+  var saveEventBtn = document.getElementById("saveEventBtn");
 
   // FullCalendarを初期化
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
     locale: "ja",
     selectable: true,
-    events: savedEvents,
-    eventClick: function (info) {
-      // 日付と時間を日本語表記でフォーマットする
-      var eventDate = info.event.start.toLocaleDateString("ja-JP", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        weekday: "short",
-      });
-
-      var eventTime = info.event.start.toLocaleTimeString("ja-JP", {
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-
-      // モーダルを開いてイベントの詳細を表示
-      modal.style.display = "block";
-      modalTitle.innerText = info.event.title;
-      modalDate.innerText = "日付: " + eventDate + " 時間: " + eventTime;
-      modalDescription.innerText = info.event.extendedProps.description || "";
-
-      // リンクフォローを防ぐ
-      info.jsEvent.preventDefault();
-    },
+    events: JSON.parse(localStorage.getItem("calendarEvents")) || [],
     dateClick: function (info) {
-      var eventTitle = prompt("どんな予定？");
-      var eventTime = prompt("時間を入力してください（例: 14:30）");
+      // 日付クリック時にモーダルを表示
+      addEventModal.style.display = "block";
 
-      if (eventTitle && eventTime) {
-        var eventDateTime = info.dateStr + "T" + eventTime;
+      // 保存ボタンを押したらイベントを追加
+      saveEventBtn.onclick = function () {
+        var eventTitle = document.getElementById("eventTitleInput").value;
+        var eventTime =
+          document.getElementById("eventTimeInput").value || "12:00"; // 時間を取得、デフォルト12:00
+        var eventType = document.getElementById("eventTypeInput").value; // イベントタイプを取得
 
-        var newEvent = {
-          title: eventTitle,
-          start: eventDateTime,
-          allDay: false, // All-dayをfalseに設定することで時間を反映
-        };
+        if (eventTitle) {
+          var eventDateTime = info.dateStr + "T" + eventTime;
 
-        calendar.addEvent(newEvent);
+          var newEvent = {
+            title: eventType + ": " + eventTitle, // タイトルにイベントタイプを追加
+            start: eventDateTime,
+            allDay: false,
+          };
 
-        // ローカルストレージに保存
-        savedEvents.push(newEvent);
-        localStorage.setItem("calendarEvents", JSON.stringify(savedEvents));
+          calendar.addEvent(newEvent);
 
-        // イベント一覧を更新
-        updateEventList(savedEvents);
-      }
+          // ローカルストレージに保存
+          var savedEvents =
+            JSON.parse(localStorage.getItem("calendarEvents")) || [];
+          savedEvents.push(newEvent);
+          localStorage.setItem("calendarEvents", JSON.stringify(savedEvents));
+
+          // イベント一覧を更新
+          updateEventList(savedEvents);
+
+          // モーダルを閉じる
+          addEventModal.style.display = "none";
+        }
+      };
     },
   });
 
   calendar.render();
 
-  // 閉じるボタンがクリックされたらモーダルを閉じる
-  closeModal.onclick = function () {
-    modal.style.display = "none";
+  // モーダルの閉じるボタンがクリックされたらモーダルを閉じる
+  closeAddEventModal.onclick = function () {
+    addEventModal.style.display = "none";
   };
 
-  // モーダル外がクリックされたらモーダルを閉じる
+  // モーダル外をクリックしたら閉じる
   window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
+    if (event.target == addEventModal) {
+      addEventModal.style.display = "none";
     }
   };
 
   // イベント一覧を更新する関数
   function updateEventList(events) {
-    // 既存の一覧をクリア
     eventListEl.innerHTML = "";
-
-    // イベントを日付順にソート
     events.sort(function (a, b) {
       return new Date(a.start) - new Date(b.start);
     });
 
-    // ソートされたイベントを一覧に追加
     events.forEach(function (event, index) {
-      if (event.title && event.start) {
-        // Check if event has a valid title and start date
-        var li = document.createElement("li");
-
-        // Add the event's title and date/time to the list item
-        li.innerHTML = `
-            <span>${event.title}</span>
-            <span>${new Date(event.start).toLocaleDateString("ja-JP", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              weekday: "short",
-            })} ${new Date(event.start).toLocaleTimeString("ja-JP", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })}</span>
-            <button onclick="deleteEvent(${index})">削除</button>
-          `;
-
-        // Append the list item to the event list
-        eventListEl.appendChild(li);
-      }
+      var li = document.createElement("li");
+      li.innerHTML = `
+          <span>${event.title}</span>
+          <span>${new Date(event.start).toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            weekday: "short",
+          })} ${new Date(event.start).toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}</span>
+          <button onclick="deleteEvent(${index})">削除</button>
+        `;
+      eventListEl.appendChild(li);
     });
   }
 
   // イベントを削除する関数
   window.deleteEvent = function (index) {
-    // イベントをローカルストレージから削除
+    var savedEvents = JSON.parse(localStorage.getItem("calendarEvents")) || [];
     savedEvents.splice(index, 1);
     localStorage.setItem("calendarEvents", JSON.stringify(savedEvents));
-
-    // カレンダーからイベントを削除
-    calendar.getEvents().forEach(function (event, eventIndex) {
-      if (eventIndex === index) {
-        event.remove();
-      }
-    });
-
-    // イベント一覧を更新
+    calendar.getEvents()[index].remove();
     updateEventList(savedEvents);
   };
 
   // ページが読み込まれたときにイベント一覧を初期化
-  updateEventList(savedEvents);
+  updateEventList(JSON.parse(localStorage.getItem("calendarEvents")) || []);
 });
